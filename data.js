@@ -9,36 +9,43 @@ export const data = {
           id: 1,
           name: 'John Doe',
           email: 'vendorName@gmail.com',
+          activity: [],
         },
         {
           id: 2,
           name: 'Mary Jane',
           email: 'vendorName@gmail.com',
+          activity: [],
         },
         {
           id: 3,
           name: 'Joe Momma',
           email: 'vendorName@gmail.com',
+          activity: [],
         },
         {
           id: 4,
           name: 'Hu Sma',
           email: 'vendorName@gmail.com',
+          activity: [],
         },
         {
           id: 5,
           name: 'Michael Leroux',
           email: 'vendorName@gmail.com',
+          activity: [],
         },
         {
           id: 6,
           name: 'Samael Martinez',
           email: 'vendorName@gmail.com',
+          activity: [],
         },
         {
           id: 7,
           name: 'Madison Moore',
           email: 'vendorName@gmail.com',
+          activity: [],
         },
       ],
       tasks: [
