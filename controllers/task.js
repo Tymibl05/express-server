@@ -28,6 +28,7 @@ export const addTask = (req, res) => {
   const { userId } = req.params;
   const task = req.body;
   const reqUser = users.find((user) => user.id == userId);
+  // add -> requested: timestamp
   reqUser.tasks.push({ ...task, status: 'pending', id: uuidv4() });
   res.send(`New task has been added.`);
 };
@@ -47,3 +48,35 @@ export const updateTaskById = (req, res) => {
 
   res.send(`Task ${reqTask.id} has been updated.`);
 };
+
+export const deleteTaskById = (req, res) => {
+  const { userId, taskId } = req.params;
+  const reqUser = users.find((user) => user.id == userId);
+  reqUser.tasks = reqUser.tasks.filter((task) => task.id !== taskId);
+  res.send(`Task ${taskId} has been deleted`);
+};
+
+export const updateCheckTime = (req, res) => {
+  const { userId, taskId, empId } = req.params;
+  const { checkIn, checkOut } = req.body;
+  const reqUser = users.find((user) => user.id == userId);
+  const reqTask = reqUser.tasks.find((task) => task.id == taskId);
+  const reqEmp = reqTask.employees.find((emp) => emp.id == empId);
+
+  if (checkIn) {
+    if (reqEmp.checkIn.length > reqEmp.checkOut.length)
+      return (
+        res
+          // .error(404)
+          .send(
+            `ERROR: ${reqEmp.name} is ALREADY checked in for task ${reqTask.id}`
+          )
+      );
+    reqEmp.checkIn.push(checkIn);
+    res.send(`${reqEmp.name} has checked in for task ${reqTask.id}`);
+  }
+  if (checkOut) {
+    reqEmp.checkOut.push(checkOut);
+    res.send(`${reqEmp.name} has checked out for task ${reqTask.id}`);
+  }
+}; //
