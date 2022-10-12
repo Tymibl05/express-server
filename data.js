@@ -54,7 +54,7 @@ export const data = {
           description: 'Replacing switches in main data center hall.',
           requested: '05/11/2022 12:37:02',
           status: 'completed',
-          timeFrame: {
+          timeframe: {
             startDate: '06/29/2022',
             endDate: '',
             startTime: '10:30:00',
@@ -86,7 +86,7 @@ export const data = {
           description: 'Updating db to v.10.0.2 in main data center hall.',
           requested: '07/15/2022 18:32:12',
           status: 'active',
-          timeFrame: {
+          timeframe: {
             startDate: '07/29/2022',
             endDate: '',
             startTime: '12:30:00',
@@ -107,7 +107,7 @@ export const data = {
             'A brief description of what the task is meant to accomplish.',
           requested: '09/21/2022 15:51:45',
           status: 'pending',
-          timeFrame: {
+          timeframe: {
             startDate: '09/30/2022',
             endDate: '10/03/2022',
             startTime: '08:30:00',
