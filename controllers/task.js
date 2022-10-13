@@ -76,6 +76,14 @@ export const updateCheckTime = (req, res) => {
     res.send(`${reqEmp.name} has checked in for task ${reqTask.id}`);
   }
   if (checkOut) {
+    if (reqEmp.checkOut.length == reqEmp.checkIn.length)
+      return (
+        res
+          // .error(404)
+          .send(
+            `ERROR: ${reqEmp.name} is NOT checked in for task ${reqTask.id}`
+          )
+      );
     reqEmp.checkOut.push(checkOut);
     res.send(`${reqEmp.name} has checked out for task ${reqTask.id}`);
   }
