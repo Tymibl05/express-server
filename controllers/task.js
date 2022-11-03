@@ -29,7 +29,7 @@ export const addTask = (req, res) => {
   const task = req.body;
   const reqUser = users.find((user) => user.id == userId);
   // add -> requested: timestamp
-  reqUser.tasks.push({ ...task, status: 'pending', id: uuidv4() });
+  reqUser.tasks.push({ ...task, status: 'pending', id: uuidv4().slice(0, 8) });
   res.send(`New task has been added.`);
 };
 
