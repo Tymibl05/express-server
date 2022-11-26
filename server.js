@@ -1,51 +1,20 @@
+import { connectDb } from './db/mongo.js';
 import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
-import {
-  addTask,
-  deleteTaskById,
-  filterTasks,
-  getTaskById,
-  getTasks,
-  updateCheckTime,
-  updateTaskById,
-} from './controllers/task.js';
-import {
-  addEmployee,
-  deleteEmpById,
-  getEmpById,
-  getEmployees,
-  getUserById,
-  updateEmpById,
-  updateUserById,
-} from './controllers/user.js';
-
-import { data } from './data.js';
-const users = data.users;
+import usersRouter from './routes/users/router.js';
+import companiesRouter from './routes/companies/router.js';
+import requestsRouter from './routes/requests/router.js';
 
 const app = express();
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cors());
-app.listen(PORT, () => console.log(`Serving on http://localhost:${PORT}`));
-// add seedRouter
+app.listen(PORT, () => {
+  console.log(`Connected to http://localhost:${PORT}`);
+  connectDb();
+});
 
-app.get('/db', (req, res) => {
-  res.send(users);
-}); // getUsers -- only for testing
-
-app.get('/:userId', getUserById); // called post authenticated sign-in. auth will pass uid
-app.patch('/:userId', updateUserById);
-app.get('/:userId/employees', getEmployees);
-app.post('/:userId/employees', addEmployee);
-app.get('/:userId/employee/:empId', getEmpById);
-app.patch('/:userId/employee/:empId', updateEmpById);
-app.delete('/:userId/employee/:empId', deleteEmpById); //***archive removed employees into another collection
-
-app.get('/:userId/tasks', getTasks);
-app.get('/:userId/tasks/:filter', filterTasks); // is this needed?
-app.get('/:userId/task/:taskId', getTaskById);
-app.post('/:userId/tasks', addTask);
-app.patch('/:userId/task/:taskId', updateTaskById);
-app.delete('./:userId/task/:taskId', deleteTaskById); //***archive removed tasks into another collection
-app.patch('/:userId/:taskId/:empId', updateCheckTime);
+app.get('/visitor-kiosk/', (req, res) => console.log('Home Route'));
+app.use('/visitor-kiosk/users', usersRouter);
+app.use('/visitor-kiosk/companies', companiesRouter);
+app.use('/visitor-kiosk/requests', requestsRouter);
